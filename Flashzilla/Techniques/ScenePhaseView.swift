@@ -13,7 +13,7 @@ struct ScenePhaseView: View {
 
     var body: some View {
         Text("Hello, Madison, this is scene phase")
-            .onChange(of: scenePhase) { oldPhase, newPhase in
+            .onChange(of: scenePhase) { _, newPhase in
                 if newPhase == .active {
                     print("Active")
                 } else if newPhase == .inactive {

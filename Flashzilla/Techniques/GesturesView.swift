@@ -21,7 +21,7 @@ struct GesturesView: View {
                     .onChanged { value in
                         currentAmount =  value.rotation
                     }
-                    .onEnded { value in
+                    .onEnded { _ in
                         finalAmount += currentAmount
                         currentAmount = .zero
                     }

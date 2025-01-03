@@ -28,7 +28,7 @@ struct GesturesSequencingView: View {
 
         // a long press gesture that enables isDragging
         let pressGesture = LongPressGesture()
-            .onEnded { value in
+            .onEnded { _ in
                 withAnimation {
                     isDragging = true
                 }

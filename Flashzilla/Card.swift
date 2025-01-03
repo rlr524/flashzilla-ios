@@ -21,5 +21,5 @@ struct Card {
 
     static let exampleThree = Card(prompt: "What is the name for the additional points provided" +
                                    " to white at the end of a game to make up for the disadvantage" +
-                                   " of going second?" , answer: "Komi")
+                                   " of going second?", answer: "Komi")
 }
