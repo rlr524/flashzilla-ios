@@ -10,6 +10,7 @@ import SwiftUI
 struct CardView: View {
     let card: Card
     @State private var isShowingAnswer = false
+    @State private var offset = CGSize.zero
 
     var body: some View {
         ZStack {
