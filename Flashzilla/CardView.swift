@@ -10,7 +10,7 @@ import SwiftUI
 struct CardView: View {
     @Environment(\.accessibilityDifferentiateWithoutColor) var accessibilityDiffWithoutColor
     let card: Card
-    var removal: (() -> Void)? = nil
+    var removal: (() -> Void)?
     @State private var isShowingAnswer = false
     @State private var offset = CGSize.zero
 

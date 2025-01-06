@@ -9,7 +9,11 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.accessibilityDifferentiateWithoutColor) var accessibilityDiffWithoutColor
-    @State private var cards = Array<Card>(repeating: .exampleOne, count: 10)
+    @Environment(\.scenePhase) var scenePhase
+    @State private var isActive = true
+    @State private var cards = [Card](repeating: .exampleOne, count: 10)
+    @State private var timeRemaining = 100
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     var body: some View {
         ZStack {
@@ -17,6 +21,14 @@ struct ContentView: View {
                 .resizable()
                 .ignoresSafeArea()
             VStack {
+                Text("Time: \(timeRemaining)")
+                    .font(.largeTitle)
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 5)
+                    .background(.black.opacity(0.75))
+                    .clipShape(.capsule)
+
                 ZStack {
                     ForEach(0..<cards.count, id: \.self) { index in
                         CardView(card: cards[index]) {
@@ -28,6 +40,7 @@ struct ContentView: View {
                     }
                 }
             }
+
             if accessibilityDiffWithoutColor {
                 VStack {
                     Spacer()
@@ -47,6 +60,22 @@ struct ContentView: View {
                     .font(.largeTitle)
                     .padding()
                 }
+            }
+        }
+        // onReceive is an action that is performed when a view detects data
+        // emitted by a given publisher (in this case, the timer)
+        .onReceive(timer) { _ in
+            guard isActive else { return }
+
+            if timeRemaining > 0 {
+                timeRemaining -= 1
+            }
+        }
+        .onChange(of: scenePhase) {
+            if scenePhase == .active {
+                isActive = true
+            } else {
+                isActive = false
             }
         }
     }
